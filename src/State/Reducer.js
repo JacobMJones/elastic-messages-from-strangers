@@ -1,5 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
+    case "addFilter":
+      return {
+        ...state,
+        filter: action.newFilter
+      };
     case "addToCount":
       return {
         ...state,
@@ -10,11 +15,36 @@ export default (state, action) => {
         ...state,
         title: action.newTitle
       };
-      case "addAccounts":
+    case "addAccounts":
       return {
         ...state,
         accounts: action.newAccounts
       };
+    case "changeCurrentRecord":
+      return {
+        ...state,
+        currentRecord: action.newCurrentRecord
+      };
+    case "changeMessage":
+      return {
+        ...state,
+        message: action.newMessage
+      };
+    case "addMessages":
+      return {
+        ...state,
+        messages: action.newMessages
+      };
+    case "changeView":
+      return {
+        ...state,
+        view: action.newView
+      };
+      case "addAuth":
+        return {
+          ...state,
+          auth: action.newAuth
+        }
     default:
       return state;
   }

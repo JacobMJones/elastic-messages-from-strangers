@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useStateValue } from "../../State/StateProvider";
 import { BasicButton } from "./style.js";
 function GetDataButton() {
@@ -15,15 +14,18 @@ export default GetDataButton;
 
 async function ButtonHandler(accountsDispatch, oldAccounts) {
   const accounts = new Array();
-  fetch("http://localhost:8080/test-query")
+  fetch("https://nodejs-server-0987.appspot.com/test-query")
     .then(res => res.json())
     .then(res => {
-      res.hits.hits.forEach(item => {
+      res.hits.hits.forEach((item, index) => {
+        item._source.index = index;
         accounts.push(item._source);
       });
+
       accountsDispatch({
         type: "addAccounts",
         newAccounts: accounts
       });
     });
 }
+// https://nodejs-server-0987.appspot.com
