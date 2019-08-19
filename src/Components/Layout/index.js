@@ -1,26 +1,38 @@
-import React from "react";
-import Input from "../Input/";
-import Messages from "../Messages/";
-import Stats from "../Stats/";
-import Filter from "../Filter/";
-import SignUp from "../Auth/SignUp"
+import React, {useEffect} from "react";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import * as ROUTES from '../../Constants/routes'
+
+import LandingPage from "../../Pages/HomePage";
+import ReadPage from "../../Pages/ReadPage";
+import CheckPage from "../../Pages/CheckPage";
+import WritePage from "../../Pages/WritePage";
 import { useStateValue } from "../../State/StateProvider";
-import {
-  Container,
-  Header,
-  FilterLayout,
-  MessageLayout,
-  InputLayout,
-  StatsLayout
-} from "./styles";
+
+
 function Layout() {
-  const [{ auth }, authDispatch] = useStateValue();
+  const [{ page }, pageDispatch] = useStateValue();
+
+  // useEffect(() => {
+  //   console.log('layout effect', page)
+  // },[page]);
   return (
     <React.Fragment>
-      {!auth && <div><SignUp authDispatch={authDispatch}/></div>}
+   <Router>
+    <div>
 
-      {auth && (
-        <Container>
+    {/* {page === 'home' && <HomePage/>}
+      {page === 'read' && <ReadPage/>}
+      {page === 'write' && <WritePage/>}
+      {page === 'check' && <CheckPage/>} */}
+
+      <Route exact path={ROUTES.LANDING} component={LandingPage} />
+      <Route path={ROUTES.READ} component={ReadPage} />
+      <Route path={ROUTES.WRITE} component={WritePage} />
+      <Route path={ROUTES.CHECK} component={CheckPage} />
+    </div>
+  </Router>
+
+        {/* <Container>
           <Header>Messages from Strangers</Header>
           <StatsLayout>
             <Stats />
@@ -29,7 +41,6 @@ function Layout() {
           <FilterLayout>
             <Filter />
           </FilterLayout>
-              
           <InputLayout>
             <Input
               isReply={false}
@@ -43,7 +54,7 @@ function Layout() {
             <Messages />
           </MessageLayout> 
         </Container>
-      )}
+     */}
     </React.Fragment>
   );
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+
   getAllMessages: async cb => {
     let res = await axios({
       url: "http://localhost:8080/query",
@@ -17,6 +18,29 @@ export default {
     console.log("stored messages", storedMessages);
     cb({ type: "addMessages", newMessages: storedMessages });
   },
+
+  getMessageById: async (id,cb) => {
+console.log('get message by id', id)
+
+
+      axios
+        .post("http://localhost:8080/message-by-id", {
+          id:id
+        })
+        .then(function(response) {
+          console.log('im in response', response.data.hits.hits[0]._source.text);
+          cb('message', response.data.hits.hits[0]._source.text)
+          
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+        
+        
+    
+  },
+
+
   checkUsernameAvailability: async (cb, name) => {
     let res = await axios({
       url: `http://localhost:8080/check-username?name=${name}`,

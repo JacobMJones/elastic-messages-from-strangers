@@ -3,5 +3,6 @@ export default {
   title: "Messages for Strangers",
   filter: [],
   view: "search",
-  auth: null
+  auth: null,
+  page:'home'
 };

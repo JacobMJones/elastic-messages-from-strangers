@@ -4,16 +4,16 @@ import axios from "axios";
 
 import { useInput } from "../../Hooks/useInput";
 
-function Input(props) {
+function InputMessage(props) {
   console.log("in input", props);
-  const [{ numbers }, countDispatch] = useStateValue();
-  const [{ title }, titleDispatch] = useStateValue();
+
 
   const {
     value: username,
     bind: bindUsername,
     reset: resetUsername
   } = useInput("");
+  
   const { value: message, bind: bindMessage, reset: resetMessage } = useInput(
     ""
   );
@@ -62,7 +62,7 @@ function Input(props) {
       </label>
       <br />
       <label>
-        password:
+        message:
         <input type="text" {...bindMessage} />
       </label>
       <br />
@@ -71,4 +71,4 @@ function Input(props) {
     </form>
   );
 }
-export default Input;
+export default InputMessage;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useStateValue } from "../../State/StateProvider";
 import elasticAPI from "../../ElasticAPI";
-import Input from "../Input/";
+import Input from "../InputMessage";
 import Message from "./Message";
 function Messages() {
   const [{ filter }] = useStateValue();
@@ -9,7 +9,6 @@ function Messages() {
   const [{ message }, messageDispatch] = useStateValue();
   const [{ view }, viewDispatch] = useStateValue();
 
-  message && console.log('focuse messages', message)
   useEffect(() => {
   !messages && elasticAPI.getAllMessages(messagesDispatch);
   });
